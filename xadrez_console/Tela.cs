@@ -1,10 +1,59 @@
-﻿using xadrez_console.tabuleiro;
+﻿using System.Threading.Tasks.Sources;
+using xadrez_console.tabuleiro;
 using xadrez_console.xadrez;
 
 namespace xadrez_console
 {
     public class Tela
     {
+        public static void ImprimirPartida(PartidaDeXadrez partida)
+        {
+            ImprimirTabuleiro(partida.tabuleiro);
+            Console.WriteLine();
+            ImprimirPecasCapturadas(partida);
+            Console.WriteLine();
+            Console.Write("Turno: " + partida.turno);
+            if(!partida.terminada)
+            {
+                Console.WriteLine();
+                Console.Write("Aguardando jogada: " + partida.jogadorAtual);
+                Console.WriteLine();
+                if (partida.isXeque)
+                    Console.Write("XEQUE!");
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("XEQUEMATE");
+                Console.WriteLine("Vencedor: " + partida.jogadorAtual);
+            }
+        }
+
+        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
+        {
+            Console.WriteLine("Peças capturadas:");
+            Console.Write("Brancas: ");
+            ImprimirConjunto(partida.pecasCapturadas(Cor.Branca));
+            Console.WriteLine();
+            Console.Write("Pretas: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            ImprimirConjunto(partida.pecasCapturadas(Cor.Preta));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+        }
+
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)        
+        {
+            Console.Write("[");
+
+            foreach (Peca peca in conjunto)
+                Console.Write(peca + " ");
+
+            Console.Write("]");
+        }
+
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
             for(int i = 0; i < tab.Linhas; i++)

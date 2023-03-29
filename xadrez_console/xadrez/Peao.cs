@@ -14,14 +14,28 @@ namespace xadrez_console.xadrez
 
             Posicao posicao = new Posicao(Posicao.linha, Posicao.coluna);
 
-            //acima
-            Posicao.definirValores(Posicao.linha - 1, Posicao.coluna);
-            if (Tabuleiro.posicaoValida(Posicao) && podeMover(Posicao))
-                matriz[Posicao.linha, Posicao.coluna] = true;
+            if(Cor == Cor.Branca)
+            {
+                Posicao.definirValores(Posicao.linha - 1, Posicao.coluna);
+                if (Tabuleiro.posicaoValida(Posicao) && podeMover(Posicao))
+                    matriz[Posicao.linha, Posicao.coluna] = true;
 
-            Posicao.definirValores(Posicao.linha - 1, Posicao.coluna);
-            if (Tabuleiro.posicaoValida(Posicao) && podeMover(Posicao))
-                matriz[Posicao.linha, Posicao.coluna] = true;
+                Posicao.definirValores(Posicao.linha - 1, Posicao.coluna);
+                if (Tabuleiro.posicaoValida(Posicao) && podeMover(Posicao))
+                    matriz[Posicao.linha, Posicao.coluna] = true;                          
+            }
+            else
+            {
+                Posicao.definirValores(Posicao.linha + 1, Posicao.coluna);
+                if (Tabuleiro.posicaoValida(Posicao) && podeMover(Posicao))
+                    matriz[Posicao.linha, Posicao.coluna] = true;
+
+                Posicao.definirValores(Posicao.linha + 1, Posicao.coluna);
+                if (Tabuleiro.posicaoValida(Posicao) && podeMover(Posicao))
+                    matriz[Posicao.linha, Posicao.coluna] = true;             
+            }
+
+            Posicao = new Posicao(posicao.linha, posicao.coluna);
 
             return matriz;
         }

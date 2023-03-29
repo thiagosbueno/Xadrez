@@ -69,6 +69,8 @@ namespace xadrez_console.xadrez
             if (Tabuleiro.posicaoValida(Posicao) && podeMover(Posicao))
                 matriz[Posicao.linha, Posicao.coluna] = true;
 
+            Posicao = new Posicao(posicao.linha, posicao.coluna);
+
             return matriz;
         }
 

@@ -64,6 +64,8 @@ namespace xadrez_console.xadrez
                 Posicao.coluna = Posicao.coluna - 1;
             }
 
+            Posicao = new Posicao(posicao.linha, posicao.coluna);
+
             return matriz;
         }
 

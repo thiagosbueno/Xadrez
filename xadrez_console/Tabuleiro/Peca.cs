@@ -20,6 +20,31 @@
             QteMovimentos++;
         }
 
+        public void decrementarQteMovimentos()
+        {
+            QteMovimentos--;
+        }
+
+        public bool existeMovimentosPossiveis()
+        {
+            bool[,] mat = movimentosPossiveis();
+            for(int i = 0; i < Tabuleiro.Linhas; i++)
+            {
+                for (int j = 0; j < Tabuleiro.Colunas; j++)
+                {
+                    if (mat[i, j])
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool podeMoverPara(Posicao posicao)
+        {
+            return movimentosPossiveis()[posicao.linha, posicao.coluna];
+        }
+
         public abstract bool[,] movimentosPossiveis();
     }
 }
