@@ -4,8 +4,11 @@ namespace xadrez_console.xadrez
 {
     public class Rei : Peca
     {
-        public Rei(Tabuleiro tabuleiro, Cor cor) : base(tabuleiro, cor)
+        private PartidaDeXadrez partida;
+
+        public Rei(Tabuleiro tabuleiro, Cor cor, PartidaDeXadrez partida) : base(tabuleiro, cor)
         {
+            this.partida = partida;
         }
 
         public override bool[,] movimentosPossiveis()
@@ -71,6 +74,39 @@ namespace xadrez_console.xadrez
 
             Posicao = new Posicao(posicao.linha, posicao.coluna);
 
+            // #jogadaespecial roque
+            if(QteMovimentos == 0 && !partida.isXeque)
+            {
+                // #jogadaespecial roque pequeno
+                Posicao posT1 = new Posicao(Posicao.linha, Posicao.coluna + 3);
+                if(testeTorreParaRoque(posT1))
+                {
+                    Posicao p1 = new Posicao(Posicao.linha, Posicao.coluna + 1);
+                    Posicao p2 = new Posicao(Posicao.linha, Posicao.coluna + 2);
+
+                    if(Tabuleiro.peca(p1) == null && Tabuleiro.peca(p2) == null)
+                    {
+                        matriz[Posicao.linha, Posicao.coluna + 2] = true;
+                    }
+                }
+
+                // #jogadaespecial roque grande
+                Posicao posT2 = new Posicao(Posicao.linha, Posicao.coluna - 4);
+                if (testeTorreParaRoque(posT2))
+                {
+                    Posicao p1 = new Posicao(Posicao.linha, Posicao.coluna - 1);
+                    Posicao p2 = new Posicao(Posicao.linha, Posicao.coluna - 2);
+                    Posicao p3 = new Posicao(Posicao.linha, Posicao.coluna - 3);
+
+                    if (Tabuleiro.peca(p1) == null && Tabuleiro.peca(p2) == null && Tabuleiro.peca(p3) == null)
+                    {
+                        matriz[Posicao.linha, Posicao.coluna - 2] = true;
+                    }
+                }
+            }
+
+            Posicao = new Posicao(posicao.linha, posicao.coluna);
+
             return matriz;
         }
 
@@ -78,6 +114,12 @@ namespace xadrez_console.xadrez
         {
             Peca peca = Tabuleiro.peca(posicao);
             return peca == null || peca.Cor != Cor;
+        }
+
+        private bool testeTorreParaRoque(Posicao posicao)
+        {
+            Peca peca = Tabuleiro.peca(posicao);
+            return peca != null && peca is Torre && peca.Cor == Cor && QteMovimentos == 0;
         }
 
         public override string ToString()

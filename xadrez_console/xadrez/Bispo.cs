@@ -22,8 +22,7 @@ namespace xadrez_console.xadrez
                 if (Tabuleiro.peca(Posicao) != null && Tabuleiro.peca(Posicao).Cor != Cor)
                     break;
 
-                Posicao.linha = Posicao.linha - 1;
-                Posicao.coluna = Posicao.coluna + 1;
+                Posicao.definirValores(Posicao.linha - 1, Posicao.coluna + 1);
             }
 
             Posicao = new Posicao(posicao.linha, posicao.coluna);
@@ -36,8 +35,7 @@ namespace xadrez_console.xadrez
                 if (Tabuleiro.peca(Posicao) != null && Tabuleiro.peca(Posicao).Cor != Cor)
                     break;
 
-                Posicao.linha = Posicao.linha - 1;
-                Posicao.coluna = Posicao.coluna - 1;
+                Posicao.definirValores(Posicao.linha - 1, Posicao.coluna - 1);
             }
 
             Posicao = new Posicao(posicao.linha, posicao.coluna);
@@ -50,8 +48,7 @@ namespace xadrez_console.xadrez
                 if (Tabuleiro.peca(Posicao) != null && Tabuleiro.peca(Posicao).Cor != Cor)
                     break;
 
-                Posicao.linha = Posicao.linha + 1;
-                Posicao.coluna = Posicao.coluna + 1;
+                Posicao.definirValores(Posicao.linha + 1, Posicao.coluna + 1);
             }
 
             Posicao = new Posicao(posicao.linha, posicao.coluna);
@@ -64,8 +61,7 @@ namespace xadrez_console.xadrez
                 if (Tabuleiro.peca(Posicao) != null && Tabuleiro.peca(Posicao).Cor != Cor)
                     break;
 
-                Posicao.linha = Posicao.linha + 1;
-                Posicao.coluna = Posicao.coluna - 1;
+                Posicao.definirValores(Posicao.linha + 1, Posicao.coluna - 1);
             }
 
             Posicao = new Posicao(posicao.linha, posicao.coluna);
